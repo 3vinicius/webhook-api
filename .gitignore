@@ -33,3 +33,5 @@ build/
 .vscode/
 /out/
 /src/main/resources/application-prod.yml
+/download/
+/logs/
