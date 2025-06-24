@@ -1,15 +1,16 @@
-FROM python:3.9-slim
-
+FROM openjdk:21-jdk-slim
 LABEL authors="vinicius"
 
-# Instala Java, ffmpeg e dependências
 RUN apt-get update && apt-get install -y \
     ffmpeg \
+    python3 \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# Instala o yt-dlp
-RUN pip install --no-cache-dir yt-dlp
+RUN pip install --no-cache-dir --break-system-packages yt-dlp
 
 WORKDIR /download
 
-ENTRYPOINT ["/bin/bash"]
+EXPOSE 8080
+COPY ./target/webhook-0.0.1-SNAPSHOT.jar ../app.jar
+ENTRYPOINT ["java","-jar","../app.jar"]

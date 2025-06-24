@@ -40,7 +40,8 @@ public class ShellExecutor {
         if (os.contains("win")) {
             return new ProcessBuilder("powershell.exe", "-Command", "docker exec "+ command);
         }
-        return new ProcessBuilder("/bin/bash", "-c", command);
+        String comandoLinux = "yt-dlp -x -o " + chatId + " --audio-format mp3 " + url;
+        return new ProcessBuilder("/bin/bash", "-c", comandoLinux);
     }
 
 
