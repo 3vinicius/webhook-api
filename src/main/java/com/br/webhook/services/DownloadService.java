@@ -35,7 +35,13 @@ public class DownloadService {
             log.info("Converting file to Base64: " + fileName);
 
 
-            File file = new File("download/" + fileName);
+            String os = System.getProperty("os.name").toLowerCase();
+
+            File file = new File(fileName);
+            if (os.contains("win")) {
+                file = new File("download/" + fileName);
+            }
+
 
             byte[] fileBytes = Files.readAllBytes(file.toPath());
             return Base64.getEncoder().encodeToString(fileBytes);
