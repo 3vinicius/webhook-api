@@ -35,15 +35,13 @@ public class ShellExecutor {
     private ProcessBuilder selectBuilder(String chatId, String url) {
         String os = System.getProperty("os.name").toLowerCase();
 
-        String command = "ydlp yt-dlp -x -o " + chatId + " --audio-format mp3 " + url;
-
         if (os.contains("win")) {
+            String command = "ydlp yt-dlp -x -o " + chatId + " --audio-format mp3 " + url;
             return new ProcessBuilder("powershell.exe", "-Command", "docker exec "+ command);
         }
-        String comandoLinux = "yt-dlp -x -o " + chatId + " --audio-format mp3 " + url;
+        String comandoLinux = "yt-dlp --cookies cookies.txt -x -o " + chatId + " --audio-format mp3 " + url;
         return new ProcessBuilder("/bin/bash", "-c", comandoLinux);
     }
-
 
     
 }

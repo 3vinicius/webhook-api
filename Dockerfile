@@ -11,6 +11,8 @@ RUN pip install --no-cache-dir --break-system-packages yt-dlp
 
 WORKDIR /download
 
+COPY cookies.txt /download
+
 EXPOSE 8080
 COPY ./target/webhook-0.0.1-SNAPSHOT.jar ../app.jar
 ENTRYPOINT ["java","-jar","../app.jar"]
